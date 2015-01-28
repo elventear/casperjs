@@ -31,6 +31,14 @@
 /*global process, console, phantom, slimer, require:true*/
 /*jshint maxstatements:34, maxcomplexity:10*/
 
+// Fix for PhantomJS 2.0-dev
+(function(){
+    var system = require('system');
+    var argsdeprecated = system.args;
+    argsdeprecated.shift();
+    phantom.args = argsdeprecated;
+}())
+
 // node check
 if ('process' in this && process.title === "node") {
     console.error('CasperJS cannot be executed within a nodejs environment');
